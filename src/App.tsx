@@ -1,13 +1,15 @@
-import './App.css'
-import Login from './pages/login/Login'
+import Footer from './components/footer/Footer';
+import Navbar from './components/navbar/Navbar';
+import Home from './pages/home/Home';
 
 function App() {
-
   return (
     <>
-      <Login />
+      <Navbar />
+      <Home />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
