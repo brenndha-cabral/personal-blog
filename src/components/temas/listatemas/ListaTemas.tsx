@@ -13,12 +13,12 @@ function ListaTemas() {
 
     const [temas, setTemas] = useState<Tema[]>([])
 
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+    const { user, handleLogout } = useContext(AuthContext)
+    const token = user.token
 
     async function buscarTemas() {
         try {
-            await buscar('/temas', setTemas, {
+            await buscar('/themes', setTemas, {
                 headers: { Authorization: token }
             })
         } catch (error: unknown) {

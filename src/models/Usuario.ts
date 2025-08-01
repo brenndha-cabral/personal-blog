@@ -2,9 +2,9 @@ import type Postagem from "./Postagem";
 
 export default interface Usuario {
     id: number;
-    nome: string;
-    usuario: string;
-    senha: string;
-    foto: string
-    postagem?: Postagem | null;
+    name: string;
+    user: string;
+    password: string;
+    photo: string
+    post?: Postagem | null;
 }

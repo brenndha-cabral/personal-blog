@@ -13,14 +13,14 @@ function FormTema() {
     const [tema, setTema] = useState<Tema>({} as Tema)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+    const { user, handleLogout } = useContext(AuthContext)
+    const token = user.token
 
     const { id } = useParams<{ id: string }>();
 
     async function buscarPorId(id: string) {
         try {
-            await buscar(`/temas/${id}`, setTema, {
+            await buscar(`/themes/${id}`, setTema, {
                 headers: { Authorization: token }
             })
         } catch (error: unknown) {
@@ -51,7 +51,7 @@ function FormTema() {
     }
 
     function retornar() {
-        navigate("/temas")
+        navigate("/themes")
     }
 
     async function gerarNovoTema(e: ChangeEvent<HTMLFormElement>) {
@@ -60,7 +60,7 @@ function FormTema() {
 
         if (id !== undefined) {
             try {
-                await atualizar(`/temas`, tema, setTema, {
+                await atualizar(`/themes`, tema, setTema, {
                     headers: { 'Authorization': token }
                 })
                 ToastAlerta('O Tema foi atualizado com sucesso!', "sucesso")
@@ -74,7 +74,7 @@ function FormTema() {
             }
         } else {
             try {
-                await cadastrar(`/temas`, tema, setTema, {
+                await cadastrar(`/themes`, tema, setTema, {
                     headers: { 'Authorization': token }
                 })
                 ToastAlerta('O Tema foi cadastrado com sucesso!', "sucesso")
@@ -106,7 +106,7 @@ function FormTema() {
                         placeholder="Descreva aqui seu tema"
                         name='descricao'
                         className="border-2 border-slate-700 rounded p-2"
-                        value={tema.descricao}
+                        value={tema.description}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>

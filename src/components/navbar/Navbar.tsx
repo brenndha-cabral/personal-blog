@@ -7,7 +7,7 @@ function Navbar() {
 
     const navigate = useNavigate();
 
-    const { usuario, handleLogout } = useContext(AuthContext)
+    const { user, handleLogout } = useContext(AuthContext)
 
     function logout() {
 
@@ -19,7 +19,7 @@ function Navbar() {
     
     let component: ReactNode
 
-    if (usuario.token !== "") {
+    if (user.token !== "") {
 
         component = (
 

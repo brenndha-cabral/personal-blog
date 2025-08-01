@@ -9,17 +9,17 @@ function Login() {
 
     const navigate = useNavigate();
 
-    const { usuario, handleLogin, isLoading } = useContext(AuthContext)
+    const { user, handleLogin, isLoading } = useContext(AuthContext)
 
     const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
         {} as UsuarioLogin
     )
 
     useEffect(() => {
-        if (usuario.token !== "") {
+        if (user.token !== "") {
             navigate('/home')
         }
-    }, [usuario])
+    }, [user])
 
     function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
         setUsuarioLogin({
@@ -41,26 +41,26 @@ function Login() {
                     onSubmit={login}>
                     <h2 className="text-slate-900 text-5xl ">Entrar</h2>
                     <div className="flex flex-col w-full">
-                        <label htmlFor="usuario">Usuário</label>
+                        <label htmlFor="user">Usuário</label>
                         <input
                             type="text"
-                            id="usuario"
-                            name="usuario"
+                            id="user"
+                            name="user"
                             placeholder="Usuario"
                             className="border-2 border-slate-700 rounded p-2"
-                            value={usuarioLogin.usuario}
+                            value={usuarioLogin.user}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
                     <div className="flex flex-col w-full">
-                        <label htmlFor="senha">Senha</label>
+                        <label htmlFor="password">Senha</label>
                         <input
                             type="password"
-                            id="senha"
-                            name="senha"
+                            id="password"
+                            name="password"
                             placeholder="Senha"
                             className="border-2 border-slate-700 rounded p-2"
-                            value={usuarioLogin.senha}
+                            value={usuarioLogin.password}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>

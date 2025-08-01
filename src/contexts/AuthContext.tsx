@@ -6,9 +6,9 @@ import UsuarioLogin from "../models/UsuarioLogin"
 import { login } from "../services/Service"
 
 interface AuthContextProps {
-    usuario: UsuarioLogin
+    user: UsuarioLogin
     handleLogout(): void
-    handleLogin(usuario: UsuarioLogin): Promise<void>
+    handleLogin(user: UsuarioLogin): Promise<void>
     isLoading: boolean
 }
 
@@ -20,12 +20,12 @@ export const AuthContext = createContext({} as AuthContextProps)
 
 export function AuthProvider({ children }: AuthProviderProps) {
 
-    const [usuario, setUsuario] = useState<UsuarioLogin>({
+    const [user, setUsuario] = useState<UsuarioLogin>({
         id: 0,
-        nome: "",
-        usuario: "",
-        senha: "",
-        foto: "",
+        name: "",
+        user: "",
+        password: "",
+        photo: "",
         token: ""
     })
 
@@ -34,7 +34,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async function handleLogin(usuarioLogin: UsuarioLogin) {
         setIsLoading(true)
         try {
-            await login(`/usuarios/logar`, usuarioLogin, setUsuario)
+            await login(`/users/login`, usuarioLogin, setUsuario)
             alert("O Usuário foi autenticado com sucesso!")
         } catch (error) {
             alert("Os Dados do usuário estão inconsistentes!")
@@ -45,16 +45,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
     function handleLogout() {
         setUsuario({
             id: 0,
-            nome: "",
-            usuario: "",
-            senha: "",
-            foto: "",
+            name: "",
+            user: "",
+            password: "",
+            photo: "",
             token: ""
         })
     }
 
     return (
-        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ user, handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
     )

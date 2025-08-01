@@ -6,11 +6,11 @@ function Footer() {
 
     const data = new Date().getFullYear()
 
-    const { usuario } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     let component: ReactNode
 
-    if (usuario.token !== "") {
+    if (user.token !== "") {
 
         component = (
 

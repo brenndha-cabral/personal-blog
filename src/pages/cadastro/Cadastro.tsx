@@ -18,10 +18,10 @@ function Cadastro() {
 
   const [usuario, setUsuario] = useState<Usuario>({
     id: 0,
-    nome: '',
-    usuario: '',
-    senha: '',
-    foto: ''
+    name: '',
+    user: '',
+    password: '',
+    photo: ''
   })
 
   useEffect(() => {
@@ -49,19 +49,19 @@ function Cadastro() {
   async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    if (confirmaSenha === usuario.senha && usuario.senha.length >= 8) {
+    if (confirmaSenha === usuario.password && usuario.password.length >= 8) {
 
       setIsLoading(true)
 
       try {
-        await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
+        await cadastrarUsuario(`/users/`, usuario, setUsuario)
         ToastAlerta('Usuário cadastrado com sucesso!', 'sucesso')
       } catch (error) {
         ToastAlerta('Erro ao cadastrar o usuário!', 'erro')
       }
     } else {
       ToastAlerta('Dados estão inconsistentes. Verifique as informações do cadastro', 'erro')
-      setUsuario({ ...usuario, senha: '' })
+      setUsuario({ ...usuario, password: '' })
       setConfirmaSenha('')
     }
 
@@ -80,47 +80,47 @@ function Cadastro() {
             <label htmlFor="nome">Nome</label>
             <input
               type="text"
-              id="nome"
-              name="nome"
+              id="name"
+              name="name"
               placeholder="Nome"
               className="border-2 border-slate-700 rounded p-2"
-              value={usuario.nome}
+              value={usuario.name}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
           </div>
           <div className="flex flex-col w-full">
-            <label htmlFor="usuario">Usuario</label>
+            <label htmlFor="user">Usuario</label>
             <input
               type="text"
-              id="usuario"
-              name="usuario"
-              placeholder="Usuario"
+              id="user"
+              name="user"
+              placeholder="Usuário"
               className="border-2 border-slate-700 rounded p-2"
-              value={usuario.usuario}
+              value={usuario.user}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
           </div>
           <div className="flex flex-col w-full">
-            <label htmlFor="foto">Foto</label>
+            <label htmlFor="photo">Foto</label>
             <input
               type="text"
-              id="foto"
-              name="foto"
+              id="photo"
+              name="photo"
               placeholder="Foto"
               className="border-2 border-slate-700 rounded p-2"
-              value={usuario.foto}
+              value={usuario.photo}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
           </div>
           <div className="flex flex-col w-full">
-            <label htmlFor="senha">Senha</label>
+            <label htmlFor="password">Senha</label>
             <input
               type="password"
-              id="senha"
-              name="senha"
+              id="password"
+              name="password"
               placeholder="Senha"
               className="border-2 border-slate-700 rounded p-2"
-              value={usuario.senha}
+              value={usuario.password}
               onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
             />
           </div>

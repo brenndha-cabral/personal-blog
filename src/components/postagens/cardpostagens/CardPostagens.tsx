@@ -13,21 +13,21 @@ function CardPostagem({ postagem }: CardPostagensProps) {
             <div>
                 <div className="flex w-full bg-indigo-400 py-2 px-4 items-center gap-4">
                     <img
-                        src={postagem.usuario?.foto}
+                        src={postagem.user?.photo}
                         className='h-12 rounded-full'
-                        alt={postagem.usuario?.nome} />
+                        alt={postagem.user?.name} />
                     <h3 className='text-lg font-bold text-center uppercase'>
-                        {postagem.usuario?.nome}
+                        {postagem.user?.name}
                     </h3>
                 </div>
                 <div className='p-4 '>
-                    <h4 className='text-lg font-semibold uppercase'>{postagem.titulo}</h4>
-                    <p>{postagem.texto}</p>
-                    <p>Tema: {postagem.tema?.descricao}</p>
+                    <h4 className='text-lg font-semibold uppercase'>{postagem.title}</h4>
+                    <p>{postagem.text}</p>
+                    <p>Tema: {postagem.theme?.description}</p>
                     <p>Data: {new Intl.DateTimeFormat(undefined, {
                         dateStyle: 'full',
                         timeStyle: 'medium',
-                    }).format(new Date(postagem.data))}</p>
+                    }).format(new Date(postagem.created_at))}</p>
                 </div>
             </div>
             <div className="flex">

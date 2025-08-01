@@ -14,17 +14,17 @@ function FormPostagem() {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [temas, setTemas] = useState<Tema[]>([])
 
-    const [tema, setTema] = useState<Tema>({ id: 0, descricao: '', })
+    const [tema, setTema] = useState<Tema>({ id: 0, description: '', })
     const [postagem, setPostagem] = useState<Postagem>({} as Postagem)
 
     const { id } = useParams<{ id: string }>()
 
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+    const { user, handleLogout } = useContext(AuthContext)
+    const token = user.token
 
     async function buscarPostagemPorId(id: string) {
         try {
-            await buscar(`/postagens/${id}`, setPostagem, {
+            await buscar(`/posts/${id}`, setPostagem, {
                 headers: { Authorization: token }
             })
         } catch (error: unknown) {
@@ -36,7 +36,7 @@ function FormPostagem() {
 
     async function buscarTemaPorId(id: string) {
         try {
-            await buscar(`/temas/${id}`, setTema, {
+            await buscar(`/theme/${id}`, setTema, {
                 headers: { Authorization: token }
             })
         } catch (error: unknown) {
@@ -48,7 +48,7 @@ function FormPostagem() {
 
     async function buscarTemas() {
         try {
-            await buscar('/temas', setTemas, {
+            await buscar('/theme', setTemas, {
                 headers: { Authorization: token }
             })
         } catch (error: unknown) {
@@ -76,7 +76,7 @@ function FormPostagem() {
     useEffect(() => {
         setPostagem({
             ...postagem,
-            tema: tema,
+            theme: tema,
         })
     }, [tema])
 
@@ -84,13 +84,13 @@ function FormPostagem() {
         setPostagem({
             ...postagem,
             [e.target.name]: e.target.value,
-            tema: tema,
-            usuario: usuario,
+            theme: tema,
+            user: user,
         });
     }
 
     function retornar() {
-        navigate('/postagens');
+        navigate('/posts');
     }
 
     async function gerarNovaPostagem(e: ChangeEvent<HTMLFormElement>) {
@@ -99,7 +99,7 @@ function FormPostagem() {
 
         if (id !== undefined) {
             try {
-                await atualizar(`/postagens`, postagem, setPostagem, {
+                await atualizar(`/posts`, postagem, setPostagem, {
                     headers: {
                         Authorization: token,
                     },
@@ -117,7 +117,7 @@ function FormPostagem() {
 
         } else {
             try {
-                await cadastrar(`/postagens`, postagem, setPostagem, {
+                await cadastrar(`/posts`, postagem, setPostagem, {
                     headers: {
                         Authorization: token,
                     },
@@ -138,7 +138,7 @@ function FormPostagem() {
         retornar()
     }
 
-    const carregandoTema = tema.descricao === '';
+    const carregandoTema = tema.description === '';
 
     return (
         <div className="container flex flex-col mx-auto items-center">
@@ -155,7 +155,7 @@ function FormPostagem() {
                         name="titulo"
                         required
                         className="border-2 border-slate-700 rounded p-2"
-                        value={postagem.titulo}
+                        value={postagem.title}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
@@ -167,7 +167,7 @@ function FormPostagem() {
                         name="texto"
                         required
                         className="border-2 border-slate-700 rounded p-2"
-                        value={postagem.texto}
+                        value={postagem.text}
                         onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
                 </div>
@@ -179,7 +179,7 @@ function FormPostagem() {
                         <option value="" selected disabled>Selecione um Tema</option>
 
                         {temas.map((tema) => (
-                            <option value={tema.id} >{tema.descricao}</option>
+                            <option value={tema.id} >{tema.description}</option>
                         ))}
 
                     </select>

@@ -1,8 +1,8 @@
 import { ReactNode, createContext, useState } from "react";
 
 interface UserContextProps {
-    nome: string
-    trocarNome: (nome: string) => void
+    name: string
+    trocarNome: (name: string) => void
 }
 
 interface UserProviderProps {
@@ -13,14 +13,14 @@ interface UserProviderProps {
 export const UserContext = createContext({} as UserContextProps)
 
 export function UserProvider({ children }: UserProviderProps) {
-    const [nome, setNome] = useState('');
+    const [name, setNome] = useState('');
 
     function trocarNome(nome: string) {
         setNome(nome)
     }
 
     return (
-        <UserContext.Provider value={{ nome, trocarNome }}>
+        <UserContext.Provider value={{ name, trocarNome }}>
             {children}
         </UserContext.Provider>
     )

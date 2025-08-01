@@ -15,12 +15,12 @@ function DeletarPostagem() {
 
     const { id } = useParams<{ id: string }>()
 
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+    const { user, handleLogout } = useContext(AuthContext)
+    const token = user.token
 
     async function buscarPorId(id: string) {
         try {
-            await buscar(`/postagens/${id}`, setPostagem, {
+            await buscar(`/posts/${id}`, setPostagem, {
                 headers: {
                     'Authorization': token
                 }
@@ -49,7 +49,7 @@ function DeletarPostagem() {
         setIsLoading(true)
 
         try {
-            await deletar(`/postagens/${id}`, {
+            await deletar(`/posts/${id}`, {
                 headers: {
                     'Authorization': token
                 }
@@ -70,7 +70,7 @@ function DeletarPostagem() {
     }
 
     function retornar() {
-        navigate("/postagens")
+        navigate("/posts")
     }
     
     return (
@@ -87,8 +87,8 @@ function DeletarPostagem() {
                     Postagem
                 </header>
                 <div className="p-4">
-                    <p className='text-xl h-full'>{postagem.titulo}</p>
-                    <p>{postagem.texto}</p>
+                    <p className='text-xl h-full'>{postagem.title}</p>
+                    <p>{postagem.text}</p>
                 </div>
                 <div className="flex">
                     <button 

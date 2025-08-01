@@ -13,14 +13,14 @@ function DeletarTema() {
     const [tema, setTema] = useState<Tema>({} as Tema)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     
-    const { usuario, handleLogout } = useContext(AuthContext)
-    const token = usuario.token
+    const { user, handleLogout } = useContext(AuthContext)
+    const token = user.token
 
     const { id } = useParams<{ id: string }>()
 
     async function buscarPorId(id: string) {
         try {
-            await buscar(`/temas/${id}`, setTema, {
+            await buscar(`/themes/${id}`, setTema, {
                 headers: {
                     'Authorization': token
                 }
@@ -49,7 +49,7 @@ function DeletarTema() {
         setIsLoading(true)
 
         try {
-            await deletar(`/temas/${id}`, {
+            await deletar(`/themes/${id}`, {
                 headers: {
                     'Authorization': token
                 }
@@ -70,7 +70,7 @@ function DeletarTema() {
     }
 
     function retornar() {
-        navigate("/temas")
+        navigate("/themes")
     }
     
     return (
@@ -83,7 +83,7 @@ function DeletarTema() {
                     className='py-2 px-6 bg-indigo-600 text-white font-bold text-2xl'>
                     Tema
                 </header>
-                <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.descricao}</p>
+                <p className='p-8 text-3xl bg-slate-200 h-full'>{tema.description}</p>
                 <div className="flex">
                     <button 
                         className='text-slate-100 bg-red-400 hover:bg-red-600 w-full py-2'

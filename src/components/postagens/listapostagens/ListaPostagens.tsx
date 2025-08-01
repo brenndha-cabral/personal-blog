@@ -13,12 +13,12 @@ function ListaPostagens() {
 
     const [postagens, setPostagens] = useState<Postagem[]>([]);
 
-    const { usuario, handleLogout } = useContext(AuthContext);
-    const token = usuario.token;
+    const { user, handleLogout } = useContext(AuthContext);
+    const token = user.token;
 
     async function buscarPostagens() {
         try {
-            await buscar('/postagens', setPostagens, {
+            await buscar('/posts', setPostagens, {
                 headers: {
                     Authorization: token,
                 },

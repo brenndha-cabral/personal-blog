@@ -8,14 +8,14 @@ function Perfil() {
 
     const navigate = useNavigate()
 
-    const { usuario } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
-        if (usuario.token === "") {
+        if (user.token === "") {
             ToastAlerta('Você precisa estar logado', 'info')
             navigate("/")
         }
-    }, [usuario.token])
+    }, [user.token])
 
     return (
         <div className='container mx-auto m-4 rounded-2xl overflow-hidden'>
@@ -26,14 +26,14 @@ function Perfil() {
 
             <img 
                 className='rounded-full w-56 mx-auto mt-[-8rem] border-8 border-white relative z-10' 
-                src={usuario.foto} alt={`Foto de perfil de ${usuario.nome}`} />
+                src={user.photo} alt={`Foto de perfil de ${user.name}`} />
 
             <div 
                 className="relative mt-[-6rem] h-72 flex flex-col 
                     bg-sky-500 text-white text-2xl items-center justify-center"
             >
-                <p>Nome: {usuario.nome} </p>
-                <p>Email: {usuario.usuario}</p>
+                <p>Nome: {user.name} </p>
+                <p>Email: {user.user}</p>
             </div>
 
         </div>
